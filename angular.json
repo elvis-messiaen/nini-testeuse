@@ -125,6 +125,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "nini-testeuse:build:production",
+            "firebaseProject": "nini-testeuse",
+            "firebaseHostingSite": "nini-testeuse"
+          }
         }
       }
     }

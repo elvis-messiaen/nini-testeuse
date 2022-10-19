@@ -1,0 +1,82 @@
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+            <div class="bg-white shadow rounded p-4">
+                <h1 class="display-6 xt-dark text-center">Nouveau produit</h1>
+                <hr class="g-dark mb-5">
+                <form [formGroup]="offerForm" (ngSubmit)="onSubmitOfferForm()">
+                    <input type="text" formControlName="id" hidden>
+                    <div class="form-group mb-3">
+                        <label class="h2" for="categorie">Catégorie : </label>
+                        <input type="text" id="categorie" class="form-control" placeholder="parfum" formControlName="categorie">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="h2" for="type">Type : </label>
+                        <input type="text" id="type" class="form-control"  placeholder="parfum" formControlName="type">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="h2" for="nom">Nom : </label>
+                        <input type="text" id="nom" class="form-control" placeholder="dior" formControlName="nom" appUppercase>
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label  for="description">Description du produit : </label>
+                      <textarea id="description" formControlName="description"rows="10" cols="55" >  parfum dior femme 100ml </textarea>
+                   </div>
+
+                    <div class="form-group mb-3">
+                      <label class="h2" for="image">Image : </label>
+                      <input type="file" id="image" accept="image/png, image/jpeg" formControlName="image" (change)="onChangeProduitImage($event)">
+                  </div>
+                  <div class="px-3 img-thumbnail" *ngIf="currentProduitImageUrl">
+                    <img [src]="currentProduitImageUrl" alt="image url" class="w-100 p-2">
+                  </div>
+
+                      <div class="d-flex justify-content-sm-end me-3">
+                        <button class="p-3 rounded bg-primary text-white">Enregistrer</button>
+                      </div>
+                      
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-8 x-auto">
+            <div class="bg-white shadow p-4 rounded">
+                <h1 class="display-6 text-dark">Annonces enregistrées</h1>
+                <hr class="bg-dark b-5">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let produit of produits ; let id = index " >
+                            <td>{{id}}</td>
+                            <td>{{ produit.categorie}}</td>
+                            <td>{{ produit.type}}</td>
+                            <td>{{ produit.nom}}</td>
+                            <td>{{ produit.description}}</td>
+                            <th>
+                                <img *ngIf="produit.image" [src]="produit.image" alt="image du produit" class="img-thumbnail">
+                            </th>
+                            <td>
+                                <button  class="btn btn-primary" type="button" (click)="oneditOffer(produit)" >Modifier</button>
+                                <button  class="btn btn-primary " type="button" (click)="onDeleteOffer(produit.id)" >Supprimer</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

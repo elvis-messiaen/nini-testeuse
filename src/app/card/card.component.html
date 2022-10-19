@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-around mb-3 flex-wrap">
+  <div class="">  
+    <div  *ngFor="let parfum of parfums">
+        <div class="card mt-5" style="width: 25rem;">
+          <img src={{parfum.img}} class="card-img-top" alt="parfum">
+            <div class="card-body">
+              <h5 class="card-title">{{parfum.titre}} </h5>
+              <p class="card-text">{{parfum.description}}</p>
+              <button class="btn btn-primary"  type="button" (click)="onClickButton()">+</button>
+          <a href="#" class="btn btn-primary posiBut ">infos</a>
+             <div  *ngIf="displayText" >
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                   Quos repudiandae expedita, 
+                   molestiae provident et nam deserunt harum saepe accusantium!
+                    Reprehenderit accusantium assumenda voluptatum hic perferendis nostrum minus,
+                   fuga at placeat. </p>
+             </div>
+           </div>
+     </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+

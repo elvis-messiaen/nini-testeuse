@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nini-testeuse": {
+      "hosting": {
+        "nini-testeuse": [
+          "nini-testeuse"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nini-testeuse"
+  }
+}
