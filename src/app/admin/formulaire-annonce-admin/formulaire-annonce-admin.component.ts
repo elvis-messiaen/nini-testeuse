@@ -57,19 +57,31 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
   onSubmitOfferForm(): void {
     const produitId = this.offerForm.value.id;
     let produit = this.offerForm.value;
+    const produitImageUrl = this.produits.find(el => el.id === produitId)?.image;
+    produit ={...produit, image: produitImageUrl};
+    
     if(!produitId  || produitId && produitId === ''){
-      delete produit.index;
+      delete produit.id;
       this.produitService.createProduit(produit, this.currentProduitImageFile).catch(console.error);
     }else {
-      delete produit.index;
-      this.produitService.updateProduit(produit, produitId).catch(console.error);
+      delete produit.id;
+      this.produitService.updateProduit(produit, produitId, this.currentProduitImageFile).catch(console.error);
     }
     this.offerForm.reset();
-    this.currentProduitImageFile= null;
+    this.currentProduitImageFile = null;
+    this.currentProduitImageUrl  = '';
   }
 
   oneditOffer(produits: Produit): void{
-    this.offerForm.setValue(produits);
+    this.currentProduitImageFile = produits.image ? produits.image : '';
+    this.offerForm.setValue({
+      id: produits.id ? produits.id: '',
+      categorie: produits.categorie ? produits.categorie: '',
+      type: produits.type ? produits.type: '',
+      nom: produits.nom ? produits.nom: '',
+      description: produits.description ? produits.description: '',
+      image: ''
+    })
   }
 
   onDeleteOffer (id? : string){

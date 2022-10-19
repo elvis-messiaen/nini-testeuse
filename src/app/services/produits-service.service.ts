@@ -44,28 +44,39 @@ export class ProduitsServiceService {
     }
   }
 
-  updateProduit (produit: Produit, produitId: string): Promise <Produit>{
-    return new Promise ((resolve, reject) => {
-      this.db.list('produits').update(produitId,produit)
-      .then((res) => {
-        const updatedProduit = {...produit, id: produitId};
-        const produitToUpdate = this.produits.findIndex(el => el.id === produitId);
-        this.produits[produitToUpdate] = updatedProduit;
-        this.dispathProduits();
-        resolve({...produit, id: produitId})
-      })
-    });
+  async updateProduit (produit: Produit, produitId: string, newProduitImage?: any): Promise <Produit>{
+    try {
+      if (newProduitImage && produit.image && produit.image !== '') {
+        await this.removeImage(produit.image);
+      }if (newProduitImage) {
+        const newImageUrl = await this.uploadImage(newProduitImage);
+        produit.image = newImageUrl;
+      }
+      await this.db.list('produits').update(produitId, produit);
+      const produitIdToUpdate = this.produits.findIndex(el => el.id === produitId);
+      this.produits[produitIdToUpdate] = {...produit, id: produitId};
+      this.dispathProduits();
+      return {...produit, id: produitId};
+    } catch (error) {
+      throw error;
+    }
   }
 
-  deleteProduit (produitId : string) : Promise<Produit>  {
-    return new Promise ((resolve, reject) => {
-      this.db.list('produits').remove(produitId)
-      .then(() => {
-        const produitDeleteId = this.produits.findIndex(el => el.id === produitId);
-        this.produits.splice(produitDeleteId, 1);
-        this.dispathProduits();
-      }).catch(console.error);
-    })
+  async deleteProduit (produitId : string) : Promise<Produit>  {
+    try {
+          const produitDeleteId = this.produits.findIndex(el => el.id === produitId);
+          const produitToDelete = this.produits[produitDeleteId];
+
+          if (produitToDelete.image && produitToDelete.image !== '' ) {
+            await this.removeImage(produitToDelete.image);
+          }
+            await this.db.list('produits').remove(produitId);
+            this.produits.splice(produitDeleteId, 1);
+            this.dispathProduits();
+            return(produitToDelete);
+    } catch (error) {
+      throw error;
+    }
   }
 
   private uploadImage(image : any): Promise<string> {
@@ -74,6 +85,15 @@ export class ProduitsServiceService {
       upload.then((res) => {
         resolve(res.ref.getDownloadURL());
       }).catch(reject);
+    });
+  }
+
+  private removeImage (imageUrl: string): Promise<any> {
+    return new Promise ((resolve, reject) => {
+      this.storage.refFromURL(imageUrl).delete().subscribe({
+        complete: () => resolve ({}),
+        error: reject
+      });
     });
   }
 }

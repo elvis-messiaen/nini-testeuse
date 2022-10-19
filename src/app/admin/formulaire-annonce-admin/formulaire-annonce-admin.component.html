@@ -29,7 +29,7 @@
                       <label class="h2" for="image">Image : </label>
                       <input type="file" id="image" accept="image/png, image/jpeg" formControlName="image" (change)="onChangeProduitImage($event)">
                   </div>
-                  <div class="px-3 img-thumbnail" *ngIf="currentProduitImageUrl">
+                  <div class="px-3 img-thumbnail" *ngIf="currentProduitImageUrl && currentProduitImageUrl !== ''">
                     <img [src]="currentProduitImageUrl" alt="image url" class="w-100 p-2">
                   </div>
 
