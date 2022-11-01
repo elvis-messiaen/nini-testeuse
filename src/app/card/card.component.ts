@@ -1,99 +1,95 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Produit } from '../interfaces/produit';
+import { ProduitsServiceService } from '../services/produits-service.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
   text = 'ce produit :';
   displayText = false;
   parfunRecupererID: any;
-  parfumsID: any;
+  categorie: any;
+  offerForm!: FormGroup;
+  produits: Produit[] = [];
+  subscription!: Subscription;
+  currentProduitImageFile!: any;
+  currentProduitImageUrl!: string;
+  typeValue!: boolean;
 
-  parfums = [
-    {
-      id: 0,
-      titre : 'channel 0',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 1,
-      titre : 'paco rabanne 1',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 2,
-      titre : 'gyvenchy 2',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 3,
-      titre : 'boss 3',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 4,
-      titre : 'diesel 4',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 5,
-      titre : 'coco 5',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 6,
-      titre : 'dior 6',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 7,
-      titre : 'dior 7',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 8,
-      titre : 'dior 8',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-    {
-      id: 9,
-      titre : 'dior 9',
-      img: 'assets/parfumOne.jpg',
-      description : 'pardum de la marque dior au senteur lLorem ipsum dolor sit amet consectetur adipisicing elit Doloribus nisi unde ratione quis, laborum aliqu Perferendis ullam magni nam libero dolorum possimus illo harum nemo recusandae quas provident ratione molestiae!',
-
-    },
-  ]
-
-  onClickButton(): void  {
-    this.displayText = this.displayText ? false : true;
-  }
-  constructor(
-    private activatedRoute: ActivatedRoute
-  ) { }
+  constructor(private formBuilder: FormBuilder,
+    private produitService: ProduitsServiceService) { }
 
   ngOnInit(): void {
+    this.initOfferForm();
+    this.subscription = this.produitService.produitSubject.subscribe({
+      next: (produit: Produit[]) => {
+        this.produits = produit;
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+    this.produitService.getProduits()
+  }
+
+  initOfferForm(): void {
+    this.offerForm = this.formBuilder.group({
+      id: null,
+      categorie: ['', Validators.required],
+      type: ['', Validators.required],
+      nom: ['', Validators.required],
+      description: ['', Validators.required],
+      image: []
+    })
+  }
+
+
+  oneditOffer(produits: Produit): void {
+    this.currentProduitImageFile = produits.image ? produits.image : '';
+    this.offerForm.setValue({
+      id: produits.id ? produits.id : '',
+      categorie: produits.categorie ? produits.categorie : '',
+      type: produits.type ? produits.type : '',
+      nom: produits.nom ? produits.nom : '',
+      description: produits.description ? produits.description : '',
+      image: ''
+    })
+  }
+
+  onDeleteOffer(id?: string) {
+    if (id) {
+      this.produitService.deleteProduit(id).catch(console.error);
+    } else {
+      console.log("ne peux être supprimer");
+    }
+
+  }
+  onTypeChoisi() {
+
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  onClickButton(): void {
 
   }
 
-}
+//   retour(produit: Produit): boolean {
+
+//     if (produit.type.toString() === 'creme') {
+//       console.log(produit.type.toString());
+//       this.typeValue = true;
+//     } else {
+//       this.typeValue = false;
+//     }
+//     return this.typeValue;
+//   }
+ }

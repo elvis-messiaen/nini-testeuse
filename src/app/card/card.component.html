@@ -1,32 +1,21 @@
-<div class="d-flex justify-content-around mb-3 flex-wrap">
-  <div class="">  
-    <div  *ngFor="let parfum of parfums">
-        <div class="card mt-5" style="width: 25rem;">
-          <img src={{parfum.img}} class="card-img-top" alt="parfum">
-            <div class="card-body">
-              <h5 class="card-title">{{parfum.titre}} </h5>
-              <p class="card-text">{{parfum.description}}</p>
-              <button class="btn btn-primary"  type="button" (click)="onClickButton()">+</button>
+<div class="container d-flex flex-row justify-content-between flex-wrap">
+  <div *ngFor="let produit of produits ; let id = index" class="mb-5">
+    <!-- <div *ngIf="retour(produit)"> -->
+      <div class="card mt-5" style="width: 25rem;">
+        <div class="card-body" style=" height:600px">
+          <img *ngIf="produit.image" [src]="produit.image" alt="image du produit"
+            class="img-thumbnail h-50 card-img-top mt-2 mb-3" style="height:300px">
+          <h5 class="card-title h3 ">{{produit.type}} </h5>
+          <p class="card-text "></p>
+          <h4 class="card-text text-center">{{ produit.nom}}</h4>
+          <p class="card-text">{{produit.description}}</p>
+          <button class="btn btn-primary" type="button" (click)="onClickButton()">+</button>
           <a href="#" class="btn btn-primary posiBut ">infos</a>
-             <div  *ngIf="displayText" >
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                   Quos repudiandae expedita, 
-                   molestiae provident et nam deserunt harum saepe accusantium!
-                    Reprehenderit accusantium assumenda voluptatum hic perferendis nostrum minus,
-                   fuga at placeat. </p>
-             </div>
-           </div>
-     </div>
+          <div *ngIf="displayText">
+            <p>{{produit.description}}</p>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
   </div>
 </div>
-
-</div>
-
-
-
-
-
-
-
-
-
