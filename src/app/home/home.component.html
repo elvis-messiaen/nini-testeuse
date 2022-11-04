@@ -1,1 +1,23 @@
-<button type="button"  class="btn btn-primary" (click)="onLogin()" >Connexion</button>
+<div class="container py-5">
+    <h1 class="display-5 mb-5 text-center text-primary">Ensembles des annonces</h1>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 col-xl-3 mx-auto bg-white " *ngFor="let produit of produits">
+            <div class="card mt-2">
+                <img [src]="produit.image" alt="image du produit" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center mt-2 h2 text-success mb-2">
+                    {{produit.nom}}
+               </h5>
+               <h6 class="fw-normal">
+                    Type de produit :  {{ produit.type | uppercase }}
+               </h6>
+               <p class="card-text">
+                    {{produit.description}}
+               </p>
+            </div>
+            <a   [routerLink]="[ '/produits', produit.id ]" class="btn btn-primary rounded mb-3 my-auto">Details</a>
+
+        </div>
+    </div>
+</div>

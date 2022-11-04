@@ -14,10 +14,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active ms-5" aria-current="page" [routerLink]="['accueil']" >Accueil</a>
-        </li>
-
         <li class="nav-item dropdown ms-5">
           <a
             class="nav-link dropdown-toggle"
@@ -88,32 +84,53 @@
         </li>
       </ul>
 
-      <ul *ngIf="connected" class="navbar-nav  mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            parametre admin
-          </a>
-          <ul class="dropdown-menu">
-            <li class="nav-item dropdown">
-            </li>
-            <li><a class="dropdown-item" href="#">
+      <ul class="navbar-nav  mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active ms-5" aria-current="page" [routerLink]="['accueil']" >Accueil</a>
+        </li>
 
-            </a></li>
-            <li><a class="dropdown-item" href="#">à propos de nous</a></li>
-            <li><a class="dropdown-item" [routerLink]="['admin','enregistrementProduit']">nouveau produit</a></li>
-            <li><a class="dropdown-item" href="#">actualité</a></li>
+        <li class="nav-item" *ngIf="!currentUser">
+          <a class="nav-link active ms-5" aria-current="page" [routerLink]="['/auth', 'signing' ]" >Connexion</a>
+        </li>
+
+        <li class="nav-item" *ngIf="!currentUser">
+          <a class="nav-link active ms-5" aria-current="page" [routerLink]="['/auth', 'signup']" >Inscription</a>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="currentUser">
+          <a
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+           admin
+        </a>
+          <ul class="dropdown-menu" aria-labelledby="navbar-dropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['admin','enregistrementProduit']">nouveau produit</a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#">à propos de nous</a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#">actualité</a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" [routerLink]="['account']">Mon compte</a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item text-danger" (click)="onSignOut()" >déconnexion</a>
+            </li>
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link active " aria-current="page" [routerLink]="['admin', 'dashboard']" >admin</a>
-        </li>   
+        
       </ul>
       <form class="d-flex" role="search">
         <input
