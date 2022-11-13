@@ -48,6 +48,7 @@ export class CardComponent implements OnInit, OnDestroy {
       image: []
     })
   }
+
   oneditOffer(produits: Produit): void {
     this.currentProduitImageFile = produits.image ? produits.image : '';
     this.offerForm.setValue({
