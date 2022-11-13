@@ -68,7 +68,6 @@ export class CardComponent implements OnInit, OnDestroy {
     } else {
       console.log("ne peux être supprimer");
     }
-
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
