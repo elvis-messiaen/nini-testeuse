@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Produit } from '../interfaces/produit';
 import { ProduitsServiceService } from '../services/produits-service.service';
@@ -11,16 +10,16 @@ import { ProduitsServiceService } from '../services/produits-service.service';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit, OnDestroy {
+
   text = 'ce produit :';
   displayText = false;
-  parfunRecupererID: any;
-  categorie: any;
   offerForm!: FormGroup;
   produits: Produit[] = [];
   subscription!: Subscription;
   currentProduitImageFile!: any;
-  currentProduitImageUrl!: string;
-  typeValue!: boolean;
+
+
+  @Input() search!: Produit;
 
   constructor(private formBuilder: FormBuilder,
     private produitService: ProduitsServiceService) { }
@@ -71,9 +70,6 @@ export class CardComponent implements OnInit, OnDestroy {
     }
 
   }
-  onTypeChoisi() {
-
-  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -81,15 +77,4 @@ export class CardComponent implements OnInit, OnDestroy {
   onClickButton(): void {
 
   }
-
-//   retour(produit: Produit): boolean {
-
-//     if (produit.type.toString() === 'creme') {
-//       console.log(produit.type.toString());
-//       this.typeValue = true;
-//     } else {
-//       this.typeValue = false;
-//     }
-//     return this.typeValue;
-//   }
  }

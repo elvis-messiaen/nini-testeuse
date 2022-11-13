@@ -1,6 +1,5 @@
-<div class="container d-flex flex-row justify-content-between flex-wrap">
-  <div *ngFor="let produit of produits ; let id = index" class="mb-5">
-    <!-- <div *ngIf="retour(produit)"> -->
+<div class="container d-flex flex-row justify-content-between flex-wrap ">
+  <div *ngFor="let produit of produits | filter: search.nom ; let id = index " class="mb-5">
       <div class="card mt-5" style="width: 25rem;">
         <div class="card-body" style=" height:600px">
           <img *ngIf="produit.image" [src]="produit.image" alt="image du produit"
@@ -16,6 +15,5 @@
           </div>
         </div>
       </div>
-    <!-- </div> -->
-  </div>
+    </div>
 </div>

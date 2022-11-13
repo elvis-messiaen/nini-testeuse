@@ -15,6 +15,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import {FilterPipe} from "./pipes/pipes/filter.pipe";
+import {PipeProduitPipe} from "./pipes/pipe-produit.pipe";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -26,6 +31,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     HomeComponent,
     DetailCardComponent,
     FormulaireContactComponent,
+    PipeProduitPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -35,12 +42,15 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
-
-
+    AngularFireStorageModule,
+    BrowserAnimationsModule
+  ],
+  exports: [
+    PipeProduitPipe
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 

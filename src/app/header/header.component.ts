@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy{
   currentUserSubscription!: Subscription;
   currentUser!: User;
+  public search = '';
 
   constructor(private authService: AuthService,
               private router: Router) { }
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
       error: console.error
     });
   }
-  
+
   onSignOut () :void {
     this.authService.signoutUser()
     .then(() => {
@@ -33,5 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.currentUserSubscription.unsubscribe();
   }
+
 
 }

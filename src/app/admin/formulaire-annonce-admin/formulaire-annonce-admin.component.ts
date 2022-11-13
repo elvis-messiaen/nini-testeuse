@@ -10,7 +10,6 @@ import { ProduitsServiceService } from '../../services/produits-service.service'
   styleUrls: ['./formulaire-annonce-admin.component.scss']
 })
 export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
-  categorie : any;
   offerForm!: FormGroup;
   produits: Produit [] = [];
   subscription!: Subscription;
@@ -48,7 +47,7 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
   onChangeProduitImage( $event :any): void {
     this.currentProduitImageFile = $event.target.files[0];
     const filereader = new FileReader();
-    filereader.readAsDataURL(this.currentProduitImageFile);  
+    filereader.readAsDataURL(this.currentProduitImageFile);
     filereader.onloadend = (e) => {
       this.currentProduitImageUrl = <string>e.target?.result;
     }
@@ -59,7 +58,7 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
     let produit = this.offerForm.value;
     const produitImageUrl = this.produits.find(el => el.id === produitId)?.image;
     produit ={...produit, image: produitImageUrl};
-    
+
     if(!produitId  || produitId && produitId === ''){
       delete produit.id;
       this.produitService.createProduit(produit, this.currentProduitImageFile).catch(console.error);
@@ -91,9 +90,6 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
       console.log("ne peux être supprimer");
     }
 
-  }
-  onTypeChoisi () {
-    
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

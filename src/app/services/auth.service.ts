@@ -37,7 +37,7 @@ export class AuthService {
     return new Promise((resolve,reject) => {
       this.auth.signOut().then(() => {
         this.currentUserSubject.next(null);
-          
+
       }).catch(console.error);
     });
   }
@@ -49,5 +49,5 @@ export class AuthService {
   }
 
 
-   
+
 }

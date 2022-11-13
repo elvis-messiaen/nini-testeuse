@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, snapshotChanges } from '@angular/fire/compat/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import {  BehaviorSubject, Observable, Subject } from 'rxjs';
+import {  BehaviorSubject } from 'rxjs';
 import { Produit } from '../interfaces/produit';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ProduitsServiceService {
 
   produitSubject: BehaviorSubject <Produit[]> = new BehaviorSubject(<Produit[]>[]);
 
-  constructor(private db: AngularFireDatabase, 
+  constructor(private db: AngularFireDatabase,
               private storage: AngularFireStorage) {   }
 
   getProduits(): void {
@@ -22,7 +22,7 @@ export class ProduitsServiceService {
       if (produitSnapshotalue) {
           const produits = Object.keys(produitSnapshotalue).map(id => ({id, ...produitSnapshotalue[id]}));
           this.produits = produits;
-      } 
+      }
       this.dispathProduits();
     })
   }
@@ -31,11 +31,12 @@ export class ProduitsServiceService {
     this.produitSubject.next(this.produits);
   }
 
-  async createProduit(produit : Produit, produitImage: any): Promise<Produit> {
+  async createProduit(produit : Produit, produitImage : any): Promise<Produit> {
     try {
         const imageUrl = produitImage ? await this.uploadImage(produitImage) : '';
         const response = this.db.list('produits').push({...produit, image: imageUrl});
         const createdProduit = {...produit, image: imageUrl, id: <string>response.key};
+
         this.produits.push(createdProduit);
         this.dispathProduits();
         return createdProduit;
@@ -96,4 +97,17 @@ export class ProduitsServiceService {
       });
     });
   }
+
+  getProduitById (produitId: string): Promise <Produit> {
+    return new Promise ((resolve,rejects) => {
+      this.db.database.ref(`produits/${produitId}`)
+      .once('value', (snapshot, err) => {
+        if (err) {
+          rejects(err);
+        }
+          resolve(snapshot.val());
+      })
+    })
+  }
+
 }
