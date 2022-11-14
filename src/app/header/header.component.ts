@@ -12,7 +12,6 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy{
   currentUserSubscription!: Subscription;
   currentUser!: User;
-  public search = '';
 
   constructor(private authService: AuthService,
               private router: Router) { }

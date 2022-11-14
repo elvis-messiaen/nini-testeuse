@@ -1,5 +1,14 @@
-<div class="container d-flex flex-row justify-content-between flex-wrap ">
-  <div *ngFor="let produit of produits | filter: search.nom ; let id = index " class="mb-5">
+<form  class="d-inline-block m-lg-2 mt-5" role="search">
+  <input
+    class="form-control me-2"
+    placeholder="Search"
+    aria-label="Search"
+    type="text"
+    (input)="onSearchChange($any($event.target).value)"
+  />
+</form>
+<div  class="container d-flex flex-row justify-content-between flex-wrap">
+  <div *ngFor="let produit of produitsFiltres; let id = index " class="mb-5">
       <div class="card mt-5" style="width: 25rem;">
         <div class="card-body" style=" height:600px">
           <img *ngIf="produit.image" [src]="produit.image" alt="image du produit"
@@ -17,3 +26,5 @@
       </div>
     </div>
 </div>
+
+

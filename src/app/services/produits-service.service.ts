@@ -17,10 +17,10 @@ export class ProduitsServiceService {
               private storage: AngularFireStorage) {   }
 
   getProduits(): void {
-    this.db.list('produits').query.limitToLast(100).once('value', snapshot => {
-            const produitSnapshotalue = snapshot.val();
-      if (produitSnapshotalue) {
-          const produits = Object.keys(produitSnapshotalue).map(id => ({id, ...produitSnapshotalue[id]}));
+    this.db.list('produits').query.limitToLast(100).once('value', echantillon => {
+            const produitEchantillonalue = echantillon.val();
+      if (produitEchantillonalue) {
+          const produits = Object.keys(produitEchantillonalue).map(id => ({id, ...produitEchantillonalue[id]}));
           this.produits = produits;
       }
       this.dispathProduits();
