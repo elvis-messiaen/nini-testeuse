@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-body{
-    background-image: url("./assets/fondEcran.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;
+       font-family: Roboto, "Helvetica Neue", sans-serif;
+       background-image: url("./assets/fondEcran.jpg");
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+}
+.ex1 {
+  max-height:20px;
+  overflow: auto;
+}

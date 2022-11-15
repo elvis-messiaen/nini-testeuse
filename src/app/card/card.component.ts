@@ -18,18 +18,21 @@ export class CardComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   currentProduitImageFile!: any;
   produitsFiltres: Produit[] = [];
+  inputVide!: string;
 
   @Input() search!: Produit;
 
   constructor(private formBuilder: FormBuilder,
-    private produitService: ProduitsServiceService) { }
+              private produitService: ProduitsServiceService) { }
 
   ngOnInit(): void {
     this.initOfferForm();
+    this.inputVide = '';
+
+
     this.subscription = this.produitService.produitSubject.subscribe({
       next: (produit: Produit[]) => {
         this.produits = produit;
-
       },
       error: (error) => {
         console.log(error);
@@ -78,8 +81,9 @@ export class CardComponent implements OnInit, OnDestroy {
 
   onSearchChange(searchValue: string): void {
     if (searchValue === null || searchValue === undefined || searchValue === "" ){
-      console.log("je suis bien dans un champs vide")
       console.log(searchValue+ " null");
+      this.inputVide = searchValue;
+      console.log(this.inputVide+ " vide");
       this.produitsFiltres = this.produits;
     }else {
       this.produitsFiltres = this.produits.filter

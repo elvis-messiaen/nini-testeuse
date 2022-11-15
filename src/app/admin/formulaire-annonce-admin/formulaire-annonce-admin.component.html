@@ -20,6 +20,11 @@
                         <input type="text" id="nom" class="form-control" placeholder="dior" formControlName="nom">
                     </div>
 
+                  <div class="form-group mb-3">
+                    <label class="h2" for="date">Date  : </label>
+                    <input type="date" id="date" class="form-control" formControlName="date" >
+                  </div>
+
                     <div class="form-group mb-3">
                       <label  for="description">Description du produit : </label>
                       <textarea id="description" formControlName="description"rows="10" cols="55" >  parfum dior femme 100ml </textarea>
@@ -53,6 +58,7 @@
                             <th scope="col">Catégorie</th>
                             <th scope="col">Titre</th>
                             <th scope="col">Nom</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Description</th>
                             <th scope="col">Image</th>
                         </tr>
@@ -63,6 +69,7 @@
                             <td>{{ produit.categorie}}</td>
                             <td>{{ produit.type}}</td>
                             <td>{{ produit.nom}}</td>
+                            <td>{{ produit.date}}</td>
                             <td>{{ produit.description}}</td>
                             <th>
                                 <img *ngIf="produit.image" [src]="produit.image" alt="image du produit" class="img-thumbnail">

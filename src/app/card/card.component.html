@@ -7,24 +7,25 @@
     (input)="onSearchChange($any($event.target).value)"
   />
 </form>
-<div  class="container d-flex flex-row justify-content-between flex-wrap">
-  <div *ngFor="let produit of produitsFiltres; let id = index " class="mb-5">
+  <div  class="container d-flex flex-row justify-content-between flex-wrap">
+    <div *ngFor="let produit of produitsFiltres; let id = index " class="mb-5">
       <div class="card mt-5" style="width: 25rem;">
         <div class="card-body" style=" height:600px">
           <img *ngIf="produit.image" [src]="produit.image" alt="image du produit"
-            class="img-thumbnail h-50 card-img-top mt-2 mb-3" style="height:300px">
-          <h5 class="card-title h3 ">{{produit.type}} </h5>
-          <p class="card-text "></p>
-          <h4 class="card-text text-center">{{ produit.nom}}</h4>
-          <p class="card-text">{{produit.description}}</p>
-          <button class="btn btn-primary" type="button" (click)="onClickButton()">+</button>
-          <a href="#" class="btn btn-primary posiBut ">infos</a>
+               class="img-thumbnail h-50 card-img-top mt-2 mb-3" style="height:300px">
+          <p class="card-title h5">Type de produit : {{produit.type}} </p>
+          <p class="card-title h5">Produit testé le : {{produit.date | date: 'dd/MM/yyyy'}} </p>
+          <p class="card-text text-center h4">{{ produit.nom}}</p>
+          <p class="card-text ex1">{{produit.description}}</p>
+          <a [routerLink]="[ '/produits', produit.id ]" class="btn btn-primary rounded mb-3 mt-5 my-auto ">Details</a>
           <div *ngIf="displayText">
             <p>{{produit.description}}</p>
           </div>
         </div>
       </div>
     </div>
+
 </div>
+
 
 

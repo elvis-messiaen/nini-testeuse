@@ -40,7 +40,8 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
       type: ['',Validators.required],
       nom: ['',Validators.required],
       description: ['',Validators.required],
-      image: []
+      image: [],
+      date: Date
     })
   }
 
@@ -78,6 +79,7 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
       categorie: produits.categorie ? produits.categorie: '',
       type: produits.type ? produits.type: '',
       nom: produits.nom ? produits.nom: '',
+      date: produits.date ? produits.date:'',
       description: produits.description ? produits.description: '',
       image: ''
     })

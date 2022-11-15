@@ -29,4 +29,8 @@ export class SingleProduitComponent implements OnInit {
     .catch(console.error);
   }
 
+  rtn() {
+    window.history.back();
+  }
+
 }

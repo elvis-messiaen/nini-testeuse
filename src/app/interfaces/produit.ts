@@ -5,4 +5,5 @@ export interface Produit {
     nom: string;
     description: string;
     image: string;
+    date: Date;
 }
