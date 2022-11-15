@@ -13,7 +13,11 @@
         <div class="card-body" style=" height:600px">
           <img *ngIf="produit.image" [src]="produit.image" alt="image du produit"
                class="img-thumbnail h-50 card-img-top mt-2 mb-3" style="height:300px">
-          <p class="card-title h5">Type de produit : {{produit.type}} </p>
+          <div class="d-flex flex-row">
+            <div class="h5 ">Categorie de produit : </div>
+            <div class="card-title h5 ms-3">{{produit.categorie}} </div>
+          </div>
+
           <p class="card-title h5">Produit testé le : {{produit.date | date: 'dd/MM/yyyy'}} </p>
           <p class="card-text text-center h4">{{ produit.nom}}</p>
           <p class="card-text ex1">{{produit.description}}</p>

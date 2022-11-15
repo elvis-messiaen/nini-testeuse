@@ -6,15 +6,15 @@
                 <hr class="g-dark mb-5">
                 <form [formGroup]="offerForm" (ngSubmit)="onSubmitOfferForm()">
                     <input type="text" formControlName="id" hidden>
-                    <div class="form-group mb-3">
-                        <label class="h2" for="categorie">Catégorie : </label>
-                        <input type="text" id="categorie" class="form-control" placeholder="parfum" formControlName="categorie">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label class="h2" for="type">Type : </label>
-                        <input type="text" id="type" class="form-control"  placeholder="parfum" formControlName="type">
-                    </div>
 
+                  <div class="form-group">
+                    <label class="h2">categorie:</label>
+                    <select formControlName="categorie" class="form-control">
+                      <option disabled>Selectionner la catégorie</option>
+                      <option>Selectionner la catégorie</option>
+                      <option *ngFor="let categ of categorieList">{{categ}}</option>
+                    </select>
+                  </div>
                     <div class="form-group mb-3">
                         <label class="h2" for="nom">Nom : </label>
                         <input type="text" id="nom" class="form-control" placeholder="dior" formControlName="nom">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-lg-8 x-auto">
+        <div >
             <div class="bg-white shadow p-4 rounded">
                 <h1 class="display-6 text-dark">Annonces enregistrées</h1>
                 <hr class="bg-dark b-5">
@@ -56,26 +56,24 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Catégorie</th>
-                            <th scope="col">Titre</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Date</th>
                             <th scope="col">Description</th>
                             <th scope="col">Image</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let produit of produits ; let id = index " >
+                    <tbody >
+                        <tr  *ngFor="let produit of produits ; let id = index " >
                             <td>{{id}}</td>
                             <td>{{ produit.categorie}}</td>
-                            <td>{{ produit.type}}</td>
                             <td>{{ produit.nom}}</td>
                             <td>{{ produit.date}}</td>
-                            <td>{{ produit.description}}</td>
+                            <td class="ex1">{{ produit.description}}</td>
                             <th>
                                 <img *ngIf="produit.image" [src]="produit.image" alt="image du produit" class="img-thumbnail">
                             </th>
                             <td>
-                                <button  class="btn btn-primary" type="button" (click)="oneditOffer(produit)" >Modifier</button>
+                                <button  class="btn btn-primary mb-3" type="button" (click)="oneditOffer(produit)" >Modifier</button>
                                 <button  class="btn btn-primary " type="button" (click)="onDeleteOffer(produit.id)" >Supprimer</button>
                             </td>
 

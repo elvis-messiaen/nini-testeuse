@@ -45,7 +45,6 @@ export class CardComponent implements OnInit, OnDestroy {
     this.offerForm = this.formBuilder.group({
       id: null,
       categorie: ['', Validators.required],
-      type: ['', Validators.required],
       nom: ['', Validators.required],
       description: ['', Validators.required],
       image: []
@@ -57,7 +56,6 @@ export class CardComponent implements OnInit, OnDestroy {
     this.offerForm.setValue({
       id: produits.id ? produits.id : '',
       categorie: produits.categorie ? produits.categorie : '',
-      type: produits.type ? produits.type : '',
       nom: produits.nom ? produits.nom : '',
       description: produits.description ? produits.description : '',
       image: ''

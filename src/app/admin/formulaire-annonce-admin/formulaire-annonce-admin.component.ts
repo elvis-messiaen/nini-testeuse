@@ -15,9 +15,13 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   currentProduitImageFile!: any;
   currentProduitImageUrl!: string;
+  categorieList: any = ['parfum', 'mains', 'visage','pieds','corps',
+    'cheveux','hygiène','café','chocolat','alcool',
+    'sans alcool','plat']
 
   constructor(private formBuilder: FormBuilder,
               private produitService : ProduitsServiceService) { }
+
 
   ngOnInit(): void {
     this.initOfferForm();
@@ -37,7 +41,6 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
     this.offerForm = this.formBuilder.group({
       id: null,
       categorie: ['',Validators.required],
-      type: ['',Validators.required],
       nom: ['',Validators.required],
       description: ['',Validators.required],
       image: [],
@@ -77,7 +80,6 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
     this.offerForm.setValue({
       id: produits.id ? produits.id: '',
       categorie: produits.categorie ? produits.categorie: '',
-      type: produits.type ? produits.type: '',
       nom: produits.nom ? produits.nom: '',
       date: produits.date ? produits.date:'',
       description: produits.description ? produits.description: '',
