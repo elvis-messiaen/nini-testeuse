@@ -19,6 +19,7 @@ export class CardComponent implements OnInit, OnDestroy {
   currentProduitImageFile!: any;
   produitsFiltres: Produit[] = [];
   inputVide!: string;
+  display: boolean = true;
 
   @Input() search!: Produit;
 
@@ -79,16 +80,19 @@ export class CardComponent implements OnInit, OnDestroy {
 
   onSearchChange(searchValue: string): void {
     if (searchValue === null || searchValue === undefined || searchValue === "" ){
-      console.log(searchValue+ " null");
+
+      this.display = true;
       this.inputVide = searchValue;
-      console.log(this.inputVide+ " vide");
-      this.produitsFiltres = this.produits;
+      console.log(this.display + " display for true");
+      console.log(this.inputVide  + "input");
+      this.produitsFiltres;
     }else {
       this.produitsFiltres = this.produits.filter
       (produit =>
           produit.nom.toLowerCase().includes(searchValue.toLowerCase()) ||
           produit.description.toLowerCase().includes(searchValue.toLowerCase()));
-          console.log(searchValue);
+          this.display = false;
+          console.log(this.display + " display for false");
        }
     }
 }
