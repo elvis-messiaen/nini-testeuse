@@ -10,11 +10,12 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown ms-5">
+
+        <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -27,39 +28,19 @@
           <ul class="dropdown-menu">
             <li class="nav-item dropdown">
             </li>
-            <li><a class="dropdown-item" [routerLink]="['/card']">parfum</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >mains</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >visage</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >pieds</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >corps</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >cheveux</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/card']" >hygiène</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Alimentaire
-          </a>
-          <ul class="dropdown-menu">
-            <li class="nav-item dropdown">
-            </li>
             <li><a class="dropdown-item" href="#">
 
             </a></li>
-            <li><a class="dropdown-item" href="#">café</a></li>
-            <li><a class="dropdown-item" href="#">chocolat</a></li>
-            <li><a class="dropdown-item" href="#">alcool</a></li>
-            <li><a class="dropdown-item" href="#">boisson sans alcool</a></li>
-            <li><a class="dropdown-item" href="#">plat préparé</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','parfum']">Parfum</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','visage']">Visage</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','mains']">Mains</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','pieds']">Pieds</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','corps']">Corps</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','cheveux']">Cheveux</a></li>
+            <li><a class="dropdown-item" [routerLink]="['cardId','hygiene']">Hygiène</a></li>
           </ul>
         </li>
+
 
         <li class="nav-item dropdown">
           <a
@@ -83,6 +64,8 @@
           </ul>
         </li>
       </ul>
+
+
 
       <ul class="navbar-nav  mb-2 mb-lg-0">
         <li class="nav-item">

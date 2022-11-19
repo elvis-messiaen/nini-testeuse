@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import {FilterPipe} from "./pipes/pipes/filter.pipe";
 import {PipeProduitPipe} from "./pipes/pipe-produit.pipe";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CardIdComponent } from './card-id/card-id.component';
 
 
 
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DetailCardComponent,
     FormulaireContactComponent,
     PipeProduitPipe,
-    FilterPipe
+    FilterPipe,
+    CardIdComponent
   ],
   imports: [
     BrowserModule,

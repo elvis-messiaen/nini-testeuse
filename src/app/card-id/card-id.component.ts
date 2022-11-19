@@ -1,15 +1,16 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { Produit } from '../interfaces/produit';
-import { ProduitsServiceService } from '../services/produits-service.service';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Produit} from "../interfaces/produit";
+import {ProduitsServiceService} from "../services/produits-service.service";
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  selector: 'app-card-id',
+  templateUrl: './card-id.component.html',
+  styleUrls: ['./card-id.component.scss']
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardIdComponent implements OnInit, OnDestroy {
 
   text = 'ce produit :';
   displayText = false;
@@ -19,13 +20,19 @@ export class CardComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   currentProduitImageFile!: any;
   display: boolean = true;
+  produitDetail!: Produit;
+
 
   @Input() search!: Produit;
 
   constructor(private formBuilder: FormBuilder,
-              private produitService: ProduitsServiceService) { }
+              private produitService: ProduitsServiceService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const categorieURL = this.route.snapshot.params['categorie'];
+    this.produitDetail =  this.produitService.getProduitByCategorie(categorieURL);
+
     this.initOfferForm();
 
     this.subscription = this.produitService.produitSubject.subscribe({
@@ -36,7 +43,8 @@ export class CardComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     })
-    this.produitService.getProduits()
+    this.produitService.getProduits();
+
   }
 
   initOfferForm(): void {
@@ -78,10 +86,11 @@ export class CardComponent implements OnInit, OnDestroy {
     }else {
       this.produitsFiltres = this.produits.filter
       (produit =>
-          produit.nom.toLowerCase().includes(searchValue.toLowerCase()) ||
-          produit.description.toLowerCase().includes(searchValue.toLowerCase()));
-          this.display = false;
-       }
+        produit.nom.toLowerCase().includes(searchValue.toLowerCase()) ||
+        produit.description.toLowerCase().includes(searchValue.toLowerCase()));
+      this.display = false;
     }
+  }
 }
+
 

@@ -110,4 +110,28 @@ export class ProduitsServiceService {
     })
   }
 
+  getProduitByCategorie (categorieP: string): Produit{
+    const produitURL = this.produits.find(prod => prod.categorie === categorieP);
+    console.log(produitURL +" lalalalallalalalalala");
+    if (!produitURL) {
+      this.produits;
+      console.log("dans le get de getCategorie " + produitURL);
+    }else if(produitURL.categorie){
+      console.log(produitURL.categorie +" else if iciciiciciicci ");
+      this.produits = this.produits.filter
+      (produit =>
+        produit.categorie.toLowerCase().includes(categorieP.toLowerCase()));
+    }
+    console.log("categorie return  " + categorieP);
+      return <Produit>produitURL;
+
+  }
 }
+
+/*
+  else if (categorieP === 'parfum') {
+      this.produits.filter( p => {
+        return p.categorie = 'parfum';
+      })
+    }
+*/

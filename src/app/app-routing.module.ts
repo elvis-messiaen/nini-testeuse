@@ -4,6 +4,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { CardComponent } from './card/card.component';
 import { FormulaireContactComponent } from './formulaire-contact/formulaire-contact.component';
 import { HomeComponent } from './home/home.component';
+import {CardIdComponent} from "./card-id/card-id.component";
 
 const routes: Routes = [
  { path: 'admin', loadChildren: () => import ('./admin/admin.module').then (m => m.AdminModule) },
@@ -12,6 +13,7 @@ const routes: Routes = [
  { path: 'produits',loadChildren: () => import ('./produits/produits.module').then (m => m.ProduitsModule) },
  { path: 'card', component : CardComponent},
  { path: 'card/:id', component : CardComponent},
+ { path: 'cardId/:categorie', component : CardIdComponent},
  { path: 'home', component: HomeComponent},
  { path: 'accueil', component : AccueilComponent},
  { path: 'contact', component: FormulaireContactComponent},
