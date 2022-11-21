@@ -29,20 +29,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
       error: console.error
     });
 
+
+
     this.route.paramMap.subscribe((params: ParamMap) => {
+
       this.categorie = params.get('categorie');
       this.produitsFiltres;
     })
-
-    /*
-    this.route.paramMap.subscribe(params => {
-      this.produits.forEach((p: Produit) => {
-        !p.categorie = params.get('categorie')
-      });
-      this.produitsFiltres;
-    });
-    */
-
 
   }
 

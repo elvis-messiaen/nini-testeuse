@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Produit} from "../interfaces/produit";
 import {ProduitsServiceService} from "../services/produits-service.service";
 import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
   selector: 'app-card-id',
@@ -20,7 +20,7 @@ export class CardIdComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   currentProduitImageFile!: any;
   display: boolean = true;
-  produitDetail!: Produit;
+  produitDetail!: Promise<Produit>;
 
 
   @Input() search!: Produit;
@@ -30,13 +30,20 @@ export class CardIdComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const categorieURL = this.route.snapshot.params['categorie'];
-    this.produitDetail =  this.produitService.getProduitByCategorie(categorieURL);
+
+    this.route.paramMap.subscribe((params:ParamMap) => {
+      const categorieURL = this.route.snapshot.params['categorie'];
+      this.produitDetail =  this.produitService.getProduitByCategory(categorieURL);
+    })
+
 
     this.initOfferForm();
 
     this.subscription = this.produitService.produitSubject.subscribe({
       next: (produit: Produit[]) => {
+        produit.filter( p => p.categorie === this.route.snapshot.params['categorie']);
+        console.log(produit.filter( p => p.categorie === this.route.snapshot.params['categorie']));
+
         this.produits = produit;
       },
       error: (error) => {
