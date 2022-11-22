@@ -34,24 +34,19 @@ export class CardIdComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params:ParamMap) => {
       const categorieURL = this.route.snapshot.params['categorie'];
       this.produitDetail =  this.produitService.getProduitByCategory(categorieURL);
+
+      this.subscription = this.produitService.produitSubject.subscribe({
+        next: (produit: Produit[]) => {
+          this.produits = produit.filter( p => p.categorie === this.route.snapshot.params['categorie']);
+          console.log(produit.filter( p => p.categorie === this.route.snapshot.params['categorie']));
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
     })
-
-
-    this.initOfferForm();
-
-    this.subscription = this.produitService.produitSubject.subscribe({
-      next: (produit: Produit[]) => {
-        produit.filter( p => p.categorie === this.route.snapshot.params['categorie']);
-        console.log(produit.filter( p => p.categorie === this.route.snapshot.params['categorie']));
-
-        this.produits = produit;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
+    this.initOfferForm()
     this.produitService.getProduits();
-
   }
 
   initOfferForm(): void {

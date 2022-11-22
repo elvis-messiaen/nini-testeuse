@@ -16,7 +16,7 @@ export class FormulaireAnnonceAdminComponent implements OnInit, OnDestroy {
   currentProduitImageFile!: any;
   currentProduitImageUrl!: string;
   categorieList: any = ['parfum', 'mains', 'visage','pieds','corps',
-    'cheveux','hygiène','café','chocolat','alcool',
+    'cheveux','hygiene','cafe','chocolat','alcool',
     'sans alcool','plat']
 
   constructor(private formBuilder: FormBuilder,

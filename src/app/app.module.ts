@@ -45,7 +45,9 @@ import { CardIdComponent } from './card-id/card-id.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    AngularFireStorageModule
   ],
   exports: [
     PipeProduitPipe

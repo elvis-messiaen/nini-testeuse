@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {Produit} from "../interfaces/produit";
 
 
 @Component({
@@ -7,5 +8,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent   {
+
+  produits: Produit []= [];
+
 
 }

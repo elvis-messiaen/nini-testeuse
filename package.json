@@ -23,8 +23,9 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@ng-bootstrap/ng-bootstrap": "^12.0.0-beta.4",
+    "angularfire2": "^5.4.2",
     "bootstrap": "^5.2.2",
-    "firebase": "^9.12.1",
+    "firebase": "^9.14.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
